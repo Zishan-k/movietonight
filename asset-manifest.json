@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/MovieToNight/movietonigt/static/css/main.d1b05096.chunk.css",
+    "main.js": "/MovieToNight/movietonigt/static/js/main.4f41c3d3.chunk.js",
+    "main.js.map": "/MovieToNight/movietonigt/static/js/main.4f41c3d3.chunk.js.map",
+    "runtime-main.js": "/MovieToNight/movietonigt/static/js/runtime-main.e6aa31d9.js",
+    "runtime-main.js.map": "/MovieToNight/movietonigt/static/js/runtime-main.e6aa31d9.js.map",
+    "static/js/2.d224cb79.chunk.js": "/MovieToNight/movietonigt/static/js/2.d224cb79.chunk.js",
+    "static/js/2.d224cb79.chunk.js.map": "/MovieToNight/movietonigt/static/js/2.d224cb79.chunk.js.map",
+    "index.html": "/MovieToNight/movietonigt/index.html",
+    "precache-manifest.bc3297f99bd74b634d5bf79a392b0798.js": "/MovieToNight/movietonigt/precache-manifest.bc3297f99bd74b634d5bf79a392b0798.js",
+    "service-worker.js": "/MovieToNight/movietonigt/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/MovieToNight/movietonigt/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.d224cb79.chunk.js.LICENSE": "/MovieToNight/movietonigt/static/js/2.d224cb79.chunk.js.LICENSE",
+    "static/media/logo.svg": "/MovieToNight/movietonigt/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e6aa31d9.js",
+    "static/js/2.d224cb79.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.4f41c3d3.chunk.js"
+  ]
+}
