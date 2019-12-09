@@ -1,0 +1,8 @@
+.header {
+    padding: 5px;
+    text-align: center;
+    background: maroon;
+    color: black;
+    font-size: 15px;
+    marquee: slide;
+}
