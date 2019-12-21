@@ -8,28 +8,26 @@ class LoginPage extends Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            isSignUpClicked: false
         }
-        this.inputRef = React.createRef()
+
 
     }
-    componentDidMount() {
-        this.inputRef.current.focus()
-    }
+
 
     render() {
 
 
         return (
             <ErrorHandler>
-            <form className="margin" onSubmit={this.onSubmitHandler}>
+            <form className="margin" onSubmit={this.onSubmitHandler} hidden={this.state.isSignUpClicked}>
                 <div>
                     <input type="text" placeholder="Enter Username" ref={this.inputRef} required value={this.state.username} onChange={this.changeUsername}/>
-                </div>
-                <div>
                     <input type="password" placeholder="Enter Password" required value={this.state.password} onChange={this.changePassword}/>
+                    <button type="submit">Submit</button>
+                    <button type="submit" onClick={this.hideMe}>SignUp</button>
                 </div>
-                    <button type="submit">Submit</button> <button type="submit"> Signup</button>
 
             </form>
             </ErrorHandler>
@@ -53,6 +51,13 @@ class LoginPage extends Component {
     onSubmitHandler = event => {
         alert(` ${this.state.username}  ${this.state.password}`)
         event.preventDefault()
+    }
+
+    hideMe= () => {
+        this.setState({
+                isSignUpClicked: true
+            }
+        )
     }
 }
 

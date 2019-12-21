@@ -5,6 +5,9 @@
     color: black;
     font-size: 15px;
     marquee: slide;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
 }
 
 .image {

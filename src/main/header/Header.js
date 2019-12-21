@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import '../../style/header.css';
 import './a.jpg';
 import withTime from "../component/withTime";
+import LoginPage from "../login/LoginPage";
+import SignUp from "../login/SignUp";
 
 
 
@@ -24,8 +26,14 @@ class Header extends Component {
     render() {
         return (
             <div className="header">
-                <h2> {this.props.message}</h2>
-                {this.props.currentTime}
+                <span >
+                <img src={require("./logo.png")} alt = "logo" width="250" height="100"/>
+                </span>
+
+                <span>
+                <SignUp/>
+                </span>
+                {/*{this.props.currentTime}*/}
                 {/*<img src={require('./a.jpg')} alt="Girl in a jacket" className="image"></img>*/}
             </div>
         );
