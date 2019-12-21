@@ -1,8 +1,12 @@
 .header {
-    padding: 5px;
+    padding: 18px;
     text-align: center;
     background: maroon;
     color: black;
     font-size: 15px;
     marquee: slide;
+}
+
+.image {
+    text-align: right;
 }
