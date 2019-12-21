@@ -25,18 +25,10 @@ class Header extends Component {
         return (
             <div className="header">
                 <h2> {this.props.message}</h2>
-                {this.state.curTime}
+                {this.props.currentTime}
                 {/*<img src={require('./a.jpg')} alt="Girl in a jacket" className="image"></img>*/}
             </div>
         );
-    }
-
-    componentDidMount() {
-        setInterval( () => {
-            this.setState({
-                curTime : new Date().toLocaleString()
-            })
-        },1000)
     }
 }
 

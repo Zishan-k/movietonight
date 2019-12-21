@@ -8,20 +8,25 @@ const withTime = (WrapperComponent) => {
         constructor(props) {
             super(props);
             this.state = {
-                time : "Hi"
+                time: "Hi",
+                curTime : new Date().toLocaleString()
             }
         }
 
         render() {
             return (
-                <WrapperComponent currentTime="" {... this.props}/>
+                <WrapperComponent currentTime={this.state.curTime} {...this.props}/>
             );
         }
-
-
+        componentDidMount() {
+            setInterval( () => {
+                this.setState({
+                    curTime : new Date().toLocaleString()
+                })
+            },1000)
+        }
 
     }
-
 
     return WithTime;
 }
