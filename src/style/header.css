@@ -1,13 +1,5 @@
 .header {
-    padding: 18px;
-    text-align: center;
     background: maroon;
-    color: black;
-    font-size: 15px;
-    marquee: slide;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between
 }
 
 .image {

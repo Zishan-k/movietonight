@@ -10,6 +10,7 @@ class App extends Component {
         return (
             <div>
                 <Header message = 'Movie2Night'/>
+                <Movie/>
                 {/*<Movie/>*/}
             </div>
         );

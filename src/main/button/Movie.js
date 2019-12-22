@@ -11,7 +11,12 @@ class Movie extends Component {
     }
 
     componentDidMount() {
-        axios.get("https://jsonplaceholder.typicode.com/photos")
+
+        axios.get("http://192.168.0.104:8080/hello",{
+                "Access-Control-Allow-Origin": "*",
+            }
+        ,
+            )
             .then(res => {
                 // console.log(res.data)
                 this.setState({movies: res.data})

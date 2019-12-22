@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import ErrorHandler from "../error_handler/ErrorHandler";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Button from "../button/Button";
 
 class SignUp extends Component {
     constructor(props) {
@@ -14,9 +17,6 @@ class SignUp extends Component {
         this.inputRef = React.createRef()
     }
 
-    componentDidMount() {
-        this.inputRef.current.focus()
-    }
 
 
     render() {
@@ -39,7 +39,6 @@ class SignUp extends Component {
                 </form>
 
 
-                <ErrorHandler>
                     <form className="margin" onSubmit={this.onSubmitHandler} hidden={this.state.isSignUpClicked}>
                         <div>
                             <input type="text" name="username" placeholder="Enter Username" ref={this.inputRef} required
@@ -51,7 +50,6 @@ class SignUp extends Component {
                         </div>
 
                     </form>
-                </ErrorHandler>
             </div>
 
 
