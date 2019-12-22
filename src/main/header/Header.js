@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import '../../style/header.css';
 import './a.jpg';
-import withTime from "../component/withTime";
-import SignUp from "../login/SignUp";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -10,7 +8,8 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Cookies from 'universal-cookie';
 
 class Header extends Component {
 
@@ -18,11 +17,13 @@ class Header extends Component {
     constructor(props) {
         super(props);
 
+        const cookies = new Cookies();
         this.state = {
-            username: '',
+            username: cookies.get('movie_2_night_user') ? cookies.get('movie_2_night_user') : '',
             password: '',
             email: '',
             isSignUpClicked: false,
+            isLoggedIn: cookies.get('movie_2_night_user') ? true : false,
             curTime: new Date().toLocaleString()
         }
         this.inputRef = React.createRef()
@@ -47,9 +48,8 @@ class Header extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+
+                        <NavDropdown title="Categories" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Si-fi</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
@@ -57,39 +57,59 @@ class Header extends Component {
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Form inline={true} onSubmit={this.submitHandler} hidden={!this.state.isSignUpClicked}>
-                        <Form.Group controlId="signUpForm">
 
-                            <FormControl type="text" name="username" placeholder="Enter Username"
-                                         value={this.state.username} onChange={this.changeHandler}
-                                         required={true} minLength={5} className="mr-sm-2"/>
-                            <FormControl type="text" name="password" placeholder="Enter Password"
-                                         value={this.state.password} onChange={this.changeHandler}
-                                         required={true} minLength={5} className="mr-sm-2"/>
-                            <FormControl type="text" name="email" placeholder="Enter Mail" value={this.state.email}
-                                         onChange={this.changeHandler} required={true}
-                                         minLength={5} className="mr-sm-2"/>
-                            <Button variant="outline-success" onClick={this.hideMe}>SignUp</Button>
-                        </Form.Group>
+                        {/*Sign up form*/}
+                        <Form inline={true} onSubmit={this.signUpHandler} hidden={!this.state.isSignUpClicked || this.state.isLoggedIn}>
+                            <Form.Group controlId="signUpForm">
+
+                                <FormControl type="text" name="username" placeholder="Enter Username"
+                                             value={this.state.username} onChange={this.changeHandler}
+                                             required={true} minLength={5} className="mr-sm-2"/>
+                                <FormControl type="text" name="password" placeholder="Enter Password"
+                                             value={this.state.password} onChange={this.changeHandler}
+                                             required={true} minLength={5} className="mr-sm-2"/>
+                                <FormControl type="text" name="email" placeholder="Enter Mail" value={this.state.email}
+                                             onChange={this.changeHandler} required={true}
+                                             minLength={5} className="mr-sm-2"/>
+                            </Form.Group>
+                            <Button variant="outline-success" type='submit' onClick={this.hideMe}>SignUp</Button>
+                        </Form>
+
+                        {/* Logged in form*/}
+
+                        <Form inline={true} onSubmit={this.onSubmitHandler} hidden={this.state.isSignUpClicked || this.state.isLoggedIn}>
+                            <Form.Group controlId="signUpForm">
+                                <FormControl type="text" name="username" placeholder="Enter Username"
+                                             ref={this.inputRef}
+                                             required
+                                             value={this.state.username} onChange={this.changeUsername}
+                                             className="mr-sm-2"/>
+                                <FormControl type="password" placeholder="Enter Password" required
+                                             value={this.state.password}
+                                             onChange={this.changePassword} className="mr-sm-2"/>
+                            </Form.Group>
+
+                            <ButtonToolbar>
+                                <Button variant="outline-success" type={"submit"}> Login</Button>
+                                <Button variant="outline-success"  type='button' onClick={this.hideMe}> SignUp</Button>
+                            </ButtonToolbar>
+
+                        </Form>
+
+                    <Form hidden={!this.state.isLoggedIn}>
+                        <Navbar.Collapse className="justify-content-end">
+                            <Nav className="mr-auto">
+                                <Navbar.Text>
+                                    Signed in as:
+                                </Navbar.Text>
+                                <NavDropdown title={this.state.username} id="basic-nav-dropdown">
+                                    <NavDropdown.Item href="#action/3.1">Logout</NavDropdown.Item>
+                                </NavDropdown>
+                            </Nav>
+                        </Navbar.Collapse>
                     </Form>
 
 
-                    <Form inline={true} onSubmit={this.onSubmitHandler} hidden={this.state.isSignUpClicked}>
-                        <Form.Group controlId="signUpForm">
-                            <FormControl type="text" name="username" placeholder="Enter Username" ref={this.inputRef}
-                                         required
-                                         value={this.state.username} onChange={this.changeUsername}
-                                         className="mr-sm-2"/>
-                            <FormControl type="password" placeholder="Enter Password" required
-                                         value={this.state.password}
-                                         onChange={this.changePassword} className="mr-sm-2"/>
-                        </Form.Group>
-                        <ButtonToolbar >
-                        <Button variant="outline-success"> Submit</Button>
-                        <Button variant="outline-success" onClick={this.hideMe}> SignUp</Button>
-                        </ButtonToolbar>
-
-                    </Form>
                 </Navbar.Collapse>
             </Navbar>
         );
@@ -99,9 +119,11 @@ class Header extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    submitHandler = e => {
+    signUpHandler = e => {
         e.preventDefault()
-        console.log(this.state)
+        this.setState({
+            isLoggedIn : true
+        })
     }
 
 
@@ -120,8 +142,13 @@ class Header extends Component {
     }
 
     onSubmitHandler = event => {
-        alert(` ${this.state.username}  ${this.state.password}`)
         event.preventDefault()
+        this.setState({
+            isLoggedIn : true
+        })
+        const cookies = new Cookies();
+        cookies.set('movie_2_night_user', this.state.username, { path: '/' });
+
     }
 
     hideMe = () => {
@@ -132,4 +159,4 @@ class Header extends Component {
     }
 }
 
-export default withTime(Header);
+export default Header;
