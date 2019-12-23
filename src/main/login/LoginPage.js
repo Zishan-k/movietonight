@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../../style/Login.css';
+
 import ErrorHandler from "../error_handler/ErrorHandler";
 
 class LoginPage extends Component {
@@ -15,9 +15,7 @@ class LoginPage extends Component {
 
     }
 
-
     render() {
-
 
         return (
             <ErrorHandler>
